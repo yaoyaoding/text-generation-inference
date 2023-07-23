@@ -124,8 +124,9 @@ class StoppingCriteria:
         if self.current_tokens >= self.max_new_tokens:
             return True, FinishReason.FINISH_REASON_LENGTH
 
-        if not self.ignore_eos_token and last_token == self.eos_token_id:
-            return True, FinishReason.FINISH_REASON_EOS_TOKEN
+        # do not stop when eos token is generated
+        # if not self.ignore_eos_token and last_token == self.eos_token_id:
+        #     return True, FinishReason.FINISH_REASON_EOS_TOKEN
 
         self.current_output += last_output
         for stop_sequence_criteria in self.stop_sequence_criterias:
